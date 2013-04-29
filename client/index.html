@@ -1,0 +1,48 @@
+<head>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+<title>testgrid</title>
+ <script>
+  $(function() {
+	$( document ).tooltip();
+	});
+</script>
+</head>
+
+<body>
+	<div id="container">
+		<div id="loading">Cargando...</div>
+		<div id="loaded">
+			<div id="columna-izq">
+			{{> settings}}
+			{{> grids}}
+			{{> descripcion}}
+			</div>
+			<div id="columna-der">
+			{{> datos_var}}
+			{{> tablaPuntos}}
+			</div>
+		</div>
+	</div>
+</body>
+
+<template name="settings">
+	<div id="settings">
+		<input type="checkbox" class="ref_check" name="ref_check" value="ref_check" {{ref_checked}}> Desmarcar para deshabilitar el refresco autom&aacute;tico<br/>
+		<input type="button" id="refresh-grid-div" class="refresh-grid" value="Refrescar" />
+		<span id="textoRefresh"></span>
+	</div>
+</template>
+
+<!-- otros templates / código protegido -->
+
+<template name="descripcion">
+	<div id="descripcion">
+		<div id="descripcion_fija">
+			{{#each productos}}
+			<div id="prod_nombre">Nombre: {{nombre}}</div>
+			<div id="prod_desc">Descripci&oacute;n: {{descripcion}}</div>
+			<div id="prod_precio_ref">Precio de referencia: ${{precio}}</div>
+			{{/each}}
+		</div>
+	</div>
+</template>
