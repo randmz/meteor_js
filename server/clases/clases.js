@@ -87,3 +87,4 @@ Juego = function(){
 					});
 	}
 }
+/* código total sin proteger: 260 líneas */
