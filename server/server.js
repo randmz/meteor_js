@@ -61,7 +61,6 @@ Meteor.startup(function () {
 		//ahora está aquí para las pruebas no más
 		//var $src = $('#grid-source');
 		
-		//datos desde el formulario
 		var $link = "images/600x350.jpg";
 
 		//para ver cuántos puntos ocupa cada click (de $25 cada uno)
@@ -73,66 +72,18 @@ Meteor.startup(function () {
 		
 		//agregar en la bd de productos cada uno de ellos, con el código y el gridid
 		
-		
 		var $ancho = 600;
 		var $alto = 350;
 		var $gsize = 2;
-		//para ver el precio del producto gordo
-		var $precio = 0;
+		
 		//radio1
+		var MAX = 38;
+		var MIN = 6;
+		var MAXB = 1235813;
+		var MINB = 112233;
 		
-    /* otras variables / código protegido */
-
-		while(i--){
-			$radio1q = 2*(Math.floor(Math.random() * (MAX - MIN + 1)) + MIN)-1;
-			$radio1w = 2*(Math.floor(Math.random() * (MAX - MIN + 1)) + MIN)-1;
-			$radio1e = 2*(Math.floor(Math.random() * (MAX - MIN + 1)) + MIN)-1;
-			$radio1r = 2*(Math.floor(Math.random() * (MAX - MIN + 1)) + MIN)-1;
-			//while para revisar que no salga 2 veces el mismo
-			
-			var arrAux = 1;
-			while(arrAux == 1){
-				pxaux = Math.floor(Math.random() * ($cols - 1 + 1)) + 1;
-				pyaux = Math.floor(Math.random() * ($rows - 1 + 1)) + 1;
-				$premio1 = pxaux + (pyaux-1)*$cols;
-
-				if(!inArray($premio1, $arrKeys)){
-					arrAux = 0;
-					$arrKeys.push($premio1);
-				}
-			}
-		
-			/* funciones sensibles / código protegido */
-		
-		var $arr0 = newFilledArray($contador_total, 0);
-		$arr0[cont12xy-1] = 2; 
-		
-		var fecha = new Date();
-		//var fecha_end = new Date().addSeconds(120);
-		var fecha_end = new Date().addHours(4);
-		
-		//cambiar el id dp por el por defecto que entrega mongo
-		var gridid = Grid.insert({
-			"_id": "1",
-			"link": $link,
-			"ancho": $ancho,
-			"alto": $alto,
-			"gsize": $gsize,
-			"cols": $cols,
-			"rows": $rows,
-			/* otros campos sensibles / código protegido */
-			"arr": $arr0
-		});
-		
-		//var start = new Date().getTime();
-				
-		//test crypt
-		/* encriptación y datos iniciales / código protegido */
-
-		/*var end = new Date().getTime();
-		var time = end - start;
-		console.log('Execution time: ' + time);
-		*/
+		var $juego = new Juego();
+		$juego.add($link, $num_puntos, codigos, $ancho, $alto, $gsize, MAX, MIN, MAXB, MINB);
 
     }
 	
@@ -140,33 +91,14 @@ Meteor.startup(function () {
 		//para crear un producto, esto ser hará mediante un menú, por lo que no aparecerá aquí
 		//ahora está aquí para las pruebas no más
 		
-		var $nombre = 'IPhone 5 White 8gb';
-		var $descripcion = 'en caja';
-		var $foto_chica = "images/iphone5-w8gb-50x50.jpg";
-		var $codigo = 11111;
-		var $precio = '300000';
-		
-		var prodid = Productos.insert({
-			"codigo": $codigo,
-			"nombre": $nombre,
-			"descripcion": $descripcion,
-			"precio": $precio,
-			"foto": $foto_chica
-		});
-		
 		var $nombre2 = 'Pendrive Kingston 8gb';
 		var $descripcion2 = 'delgado';
 		var $foto_chica2 = "images/pendrive-8gb-50x50.jpg";
 		var $codigo2 = 11112;
-		var $precio2 = '4000';
+		var $precio_ref2 = '4000';
 		
-		var prodid2 = Productos.insert({
-			"codigo": $codigo2,
-			"nombre": $nombre2,
-			"descripcion": $descripcion2,
-			"precio": $precio2,
-			"foto": $foto_chica2
-		});
+		var prod2 = new Prod();
+		prod2.add($nombre2, $descripcion2, $foto_chica2, $codigo2, $precio_ref2);
 	
     }
 	
@@ -193,7 +125,7 @@ Meteor.methods({
 		var clases = "";
 		var arr2 = 1;
 		
-		/* método muy sensible, para llamarlo desde el cliente / código protegido */
+		/* método muy sensible (~180 líneas), para llamarlo desde el cliente / código protegido */
 
 	}
 });
@@ -270,8 +202,8 @@ function getDateTimeFor(now, target) { // target should be a Date object
 //tiempo
 Meteor.setInterval(function () {
 
-	/* código sensible que se ejecuta cada 1 segundo / código protegido */
+	/* código sensible (~100 líneas) que se ejecuta cada 1 segundo / código protegido */
 
 }, 1000);
 
-/* código total sin proteger: 678 líneas */
+/* código total sin proteger: 443 líneas */
